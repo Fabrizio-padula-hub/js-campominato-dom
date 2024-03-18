@@ -26,11 +26,20 @@ playButton.addEventListener('click', function(){
         const numberSquare = document.createElement('div');
         numberSquare.classList.add('square');
         numberSquare.innerHTML = `<span>${i}</span>`;
+        
         // mettere la cella in ascolto
         numberSquare.addEventListener('click', function() {
-            // Qui facciamo if e else con if delle bombe
-            // (se il numero della cella cliccata ha il numero uguale ai numeri
-            // random è vero, e la partita finisce)
+            // imposto i click dell'utente
+            let clickUser = 0;
+            clickUser++;
+            // Cambia lo stile della cella cliccata
+            this.classList.add('azure');
+            // stampa il numero della cella nella console
+            console.log('Numero della cella cliccata:', cellNumber);
+
+            
+            // se il numero della cella cliccata ha il numero uguale ai numeri
+            // random è vero, e la partita finisce
             // E else che rimane tutto com’è
             let generateNumbers = '';
             for(let i = 0; i < numberRandom.length; i++){
@@ -38,13 +47,13 @@ playButton.addEventListener('click', function(){
                 console.log(generateNumbers)
             
                 if(generateNumbers === cellNumber){
-                    alert('bomba');
+                    alert(`Hai totalizzato ${clickUser}`);
+                    this.classList.add('red');
+                    
                 }
             }
-            // Cambia lo stile della cella cliccata
-            this.classList.add('azure');
-            // stampa il numero della cella nella console
-            console.log('Numero della cella cliccata:', cellNumber);
+            // 
+            
         });
         myGrid.append(numberSquare);
     };
@@ -79,3 +88,4 @@ function listNumberRandom(){
     return randomList;
     
 }
+
