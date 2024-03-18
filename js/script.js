@@ -13,24 +13,36 @@ const playButton = document.getElementById('play-btn');
 
 // l'utente clicca sul btn play
 playButton.addEventListener('click', function(){
-    // L’array contenete i numeri random deve essere collegato alla griglia e non deve avere doppioni
-    // RESPONSABILITA’: l’array deve essere vuoto fino a quando non vengono pushati i numeri random
-    
-
+    // L’array contenete i numeri random deve essere collegato alla griglia
+    // e non deve avere doppioni
+    const numberRandom = listNumberRandom();
 
     // si genera la griglia 10x10
     const myGrid = document.querySelector('#grid');
     myGrid.innerHTML = '';
     for(let i = 1; i <= 100; i++){
+        const cellNumber = i;
+
         const numberSquare = document.createElement('div');
         numberSquare.classList.add('square');
         numberSquare.innerHTML = `<span>${i}</span>`;
         // mettere la cella in ascolto
         numberSquare.addEventListener('click', function() {
+            // Qui facciamo if e else con if delle bombe
+            // (se il numero della cella cliccata ha il numero uguale ai numeri
+            // random è vero, e la partita finisce)
+            // E else che rimane tutto com’è
+            let generateNumbers = '';
+            for(let i = 0; i < numberRandom.length; i++){
+                generateNumbers = numberRandom[i];
+                console.log(generateNumbers)
+            
+                if(generateNumbers === cellNumber){
+                    alert('bomba');
+                }
+            }
             // Cambia lo stile della cella cliccata
             this.classList.add('azure');
-            // ottieni il numero della cella
-            const cellNumber = i;
             // stampa il numero della cella nella console
             console.log('Numero della cella cliccata:', cellNumber);
         });
@@ -51,7 +63,7 @@ function getRndInteger(min, max) {
 // Il pc genera 16 numeri random da 1-100
 // Pushare solo i numeri che non hanno doppioni
 // RESPONSABILITA’: è un operazione indipendente ma dentro il btn play
-function numberRandom(){
+function listNumberRandom(){
     // array vuovo
     const randomList = [];
     // per 16 volte generami un numero
@@ -61,8 +73,9 @@ function numberRandom(){
         // pushare i numeri se non sono presenti 
         if(!randomList.includes(random)){
             randomList.push(random)
-            console.log(i + ' - ' + randomList[i])
         }
+        
     }
     return randomList;
+    
 }
