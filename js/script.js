@@ -10,6 +10,8 @@
 
 // prendere il btn play
 const playButton = document.getElementById('play-btn');
+// variabile del click a zero
+let clickUser = 0;
 
 // l'utente clicca sul btn play
 playButton.addEventListener('click', function(){
@@ -30,7 +32,6 @@ playButton.addEventListener('click', function(){
         // mettere la cella in ascolto
         numberSquare.addEventListener('click', function() {
             // imposto i click dell'utente
-            let clickUser = 0;
             clickUser++;
             // Cambia lo stile della cella cliccata
             this.classList.add('azure');
@@ -44,15 +45,12 @@ playButton.addEventListener('click', function(){
             let generateNumbers = '';
             for(let i = 0; i < numberRandom.length; i++){
                 generateNumbers = numberRandom[i];
-                console.log(generateNumbers)
-            
+                
                 if(generateNumbers === cellNumber){
-                    alert(`Hai totalizzato ${clickUser}`);
+                    alert(`Hai totalizzato ${clickUser} punti`);
                     this.classList.add('red');
-                    
                 }
             }
-            // 
             
         });
         myGrid.append(numberSquare);
